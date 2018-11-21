@@ -1,0 +1,9 @@
+{
+  "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "vue"
+  ],
+  "eslint.autoFixOnSave": false,
+  "html.format.wrapAttributes": "force-expand-multiline"
+}

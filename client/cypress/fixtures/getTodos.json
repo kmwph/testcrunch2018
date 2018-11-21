@@ -1,0 +1,36 @@
+{
+    "success": "true",
+    "message": "todos retrieved successfully",
+    "data": [
+        {
+            "id": "ohwbkw59lf",
+            "name": "Buy beer! Always buy beer",
+            "finished": false
+        },
+        {
+            "id": "josbred8fz9",
+            "name": "Bungee jumping",
+            "finished": false
+        },
+        {
+            "id": "mcf2oypyhcn",
+            "name": "Nothing",
+            "finished": false
+        },
+        {
+            "id": "enn6zzt579j",
+            "name": "Breakfast",
+            "finished": true
+        },
+        {
+            "id": "oe571xkdzfd",
+            "name": "Lunch",
+            "finished": true
+        },
+        {
+            "id": "qkzljwd41e9",
+            "name": "Dinner",
+            "finished": false
+        }
+    ]
+}
