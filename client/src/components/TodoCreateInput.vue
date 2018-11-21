@@ -5,6 +5,7 @@
       v-model="valueData"
       label="What needs to be done?"
       solo
+      data-cy="create-input"
       @keypress.enter="create"
     >
 

@@ -5,6 +5,8 @@
       'todo-item--finished': value.finished,
       'todo-item--disabled': disabled,
     }"
+    :data-cy-name="value.name"
+    data-cy="todo-item"
     class="todo-item"
   >
 
