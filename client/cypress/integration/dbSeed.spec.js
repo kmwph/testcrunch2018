@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 context('DB Seed', function () {
-  const apiUrl = 'http://localhost:5000/api/v1/todos';
+  const apiUrl = Cypress.env('apiUrl');
 
   beforeEach(function () {
     cy.request(apiUrl).then((response) => {
