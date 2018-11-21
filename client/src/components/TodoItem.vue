@@ -33,6 +33,7 @@
         <span
           v-else
           class="todo-item__controls__name__placeholder"
+          data-cy="todo-item__name"
           @click="focus"
         >
           {{ value.name }}

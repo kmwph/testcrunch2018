@@ -1,4 +1,7 @@
 /// <reference types="Cypress" />
+import {
+  todoFilters
+} from '../../src/constants';
 
 context('Mocked', function () {
   const todoName = `Cypress ${Cypress.moment().format('YY-MM-DD x')}`;
@@ -81,6 +84,36 @@ context('Mocked', function () {
         .get('[data-cy="alert"]')
         .should('have.length', 1)
         .and('contain', 'Error during create todo');
+    });
+  });
+
+  context('Data displayed correctly', function () {
+    beforeEach(function () {
+      cy
+        .fixture('getTodos')
+        .then((todos) => {
+          cy.wrap({
+              all: todos.data,
+              active: todos.data.filter(i => !i.finished),
+              completed: todos.data.filter(i => i.finished),
+            })
+            .as('todos');
+        });
+    });
+
+    const categoryKeys = Object.values(todoFilters);
+    categoryKeys.forEach((category) => {
+      it(`Category [${category}] is displayed correctly`, function () {
+        cy
+          .visit(`#/todo?show=${category}`)
+          .get('[data-cy="todo-item__name"]')
+          .then((elements) => {
+            const actualTodoNames = elements.toArray().map(i => i.innerText);
+            const expectedTodoNames = this.todos[category].map(i => i.name);
+
+            cy.expect(actualTodoNames).to.deep.equal(expectedTodoNames);
+          });
+      });
     });
   });
 });
