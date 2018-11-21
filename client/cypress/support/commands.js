@@ -23,3 +23,11 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+
+Cypress.Commands.add('createTodo', (name) => {
+  cy
+    .get('[data-cy="create-input"]')
+    .type(name)
+    .type('{enter}');
+});

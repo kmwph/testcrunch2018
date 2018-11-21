@@ -6,9 +6,7 @@ context('E2E', function () {
 
     cy
       .visit('')
-      .get('[data-cy="create-input"]')
-      .type(todoName)
-      .type('{enter}');
+      .createTodo(todoName);
 
     cy
       .get(`[data-cy="todo-item"][data-cy-name="${todoName}"]`)

@@ -12,6 +12,7 @@
           :type="alert.type"
           dismissible
           class="alert-container__alerts__alert"
+          data-cy="alert"
           @input="$alert.remove(alert.id)"
         >
           {{ alert.message }}
