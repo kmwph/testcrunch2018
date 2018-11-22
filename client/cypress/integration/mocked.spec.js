@@ -1,25 +1,18 @@
 /// <reference types="Cypress" />
 import {
-  todoFilters
+  todoFilters,
 } from '../../src/constants';
 
 context('Mocked', function () {
   const todoName = `Cypress ${Cypress.moment().format('YY-MM-DD x')}`;
-  const apiUrl = Cypress.env('apiUrl');
 
   beforeEach(function () {
-    cy
-      .server()
-      .route({
-        method: 'GET',
-        url: apiUrl,
-        response: 'fx:getTodos',
-      });
+    cy.mockGetTodos();
   });
 
   context('Create', function () {
     beforeEach(function () {
-      const postResponse = {
+      const response = {
         success: 'true',
         message: 'todo added successfully',
         data: {
@@ -29,14 +22,7 @@ context('Mocked', function () {
         },
       };
 
-      cy
-        .route({
-          method: 'POST',
-          url: apiUrl,
-          response: postResponse,
-          status: 201,
-        })
-        .as('postTodo');
+      cy.mockPostTodo({ response });
     });
 
     it('Create todo => todo added to the list', function () {
@@ -67,14 +53,7 @@ context('Mocked', function () {
 
   context('Errors', function () {
     it('Create todo error => alert displayed', function () {
-      cy
-        .route({
-          method: 'POST',
-          url: apiUrl,
-          response: {},
-          status: 500,
-        })
-        .as('postTodoError');
+      cy.mockPostTodo({ status: 500 });
 
       cy
         .visit('')
@@ -93,10 +72,10 @@ context('Mocked', function () {
         .fixture('getTodos')
         .then((todos) => {
           cy.wrap({
-              all: todos.data,
-              active: todos.data.filter(i => !i.finished),
-              completed: todos.data.filter(i => i.finished),
-            })
+            all: todos.data,
+            active: todos.data.filter(i => !i.finished),
+            completed: todos.data.filter(i => i.finished),
+          })
             .as('todos');
         });
     });
